@@ -125,8 +125,10 @@ const reduceEntries = entries =>
 Strip contentful content types down to the barebones info and convert to an object
 @param {array} contentTypes - an array of content types
 */
-const reduceContentTypes = contentTypes => {
-  const barebonesContentType = contentTypes.map(type => {
+const reduceContentTypes = (contentTypes, filterContentType) => {
+  const barebonesContentType = contentTypes
+    .filter(type => filterContentType === '' || type.sys.id === filterContentType)
+    .map(type => {
     const fields = type.fields
       .map(getBarebonesField)
       .reduce(reduceArrayToObj, {})

@@ -83,8 +83,10 @@ module.exports = class Indexer {
       const contentTypesResponse = await this.contentful.client.getContentTypes()
       const { locales } = await this.contentful.client.getSpace()
       const contentTypes = transform.reduceContentTypes(
-        contentTypesResponse.items
+        contentTypesResponse.items,
+        this.contentful.contentType
       )
+
       const entries = transform.reformatEntries(
         resolvedEntries,
         contentTypes,

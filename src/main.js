@@ -1,5 +1,6 @@
 const debug = require(`debug`)(`contentful-text-search`)
 const ContentfulSyncRedis = require(`contentful-sync-redis`)
+const ContentfulSyncWrapper = require('./contentful-wrapper')
 const ElasticsearchClient = require(`./elasticsearch-client`)
 const Indexer = require(`./indexer`)
 const Update = require(`./update`)
@@ -11,14 +12,23 @@ const config = require(`./index-config`)
 
 module.exports = class ContentfulTextSearch {
   constructor(args) {
-    const { space, token, contentfulHost, redisHost } = args
+    const { space, token, contentfulHost, redisHost, contentType} = args
     this.space = space
-    this.contentful = new ContentfulSyncRedis({
-      space,
-      token,
-      contentfulHost,
-      redisHost,
-    })
+    this.contentType = contentType ? contentType : ''
+    if (!redisHost) {
+      this.contentful = new ContentfulSyncWrapper({
+        space: space,
+        token: token,
+        contentType: this.contentType
+      })
+    } else {
+      this.contentful = new ContentfulSyncRedis({
+        space,
+        token,
+        contentfulHost,
+        redisHost,
+      })
+    }
     this.elasticsearch = new ElasticsearchClient({
       host: args.elasticHost,
       user: args.elasticUser,
@@ -34,7 +44,8 @@ module.exports = class ContentfulTextSearch {
     try {
       const contentTypesResponse = await this.contentful.client.getContentTypes()
       const contentTypes = transform.reduceContentTypes(
-        contentTypesResponse.items
+        contentTypesResponse.items,
+        this.contentful.contentType
       )
       this.generatedQuery = config.generateQuery(contentTypes)
       this.indexer.queryGeneratedSinceLastIndexChange = true
