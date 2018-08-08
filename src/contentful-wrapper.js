@@ -33,7 +33,7 @@ module.exports = class ContentfulSyncWrapper {
     try {
       const { entries, deletedEntries } = await this.sync()
       debug(`Entries`)
-      console.log(entries)
+      debug(entries)
       return entries
     } catch (err) {
       debug(`Error getting entries: %s`, err)
