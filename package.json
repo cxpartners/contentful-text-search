@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattdean1/contentful-text-search.git"
+    "url": "git+https://github.com/cxpartners/contentful-text-search.git"
   },
   "keywords": [
     "elasticsearch",
@@ -18,9 +18,9 @@
   "author": "Matt Dean",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mattdean1/contentful-text-search/issues"
+    "url": "https://github.com/cxpartners/contentful-text-search/issues"
   },
-  "homepage": "https://github.com/mattdean1/contentful-text-search#readme",
+  "homepage": "https://github.com/cxpartners/contentful-text-search#readme",
   "devDependencies": {
     "eslint": "^4.5.0",
     "mocha": "^3.5.0",
