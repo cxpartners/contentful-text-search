@@ -1,5 +1,4 @@
 const debug = require(`debug`)(`contentful-text-search`)
-const ContentfulSyncRedis = require(`contentful-sync-redis`)
 const ContentfulSyncWrapper = require('./contentful-wrapper')
 const ElasticsearchClient = require(`./elasticsearch-client`)
 const Indexer = require(`./indexer`)
@@ -15,20 +14,11 @@ module.exports = class ContentfulTextSearch {
     const { space, token, contentfulHost, redisHost, contentType} = args
     this.space = space
     this.contentType = contentType ? contentType : ''
-    if (!redisHost) {
-      this.contentful = new ContentfulSyncWrapper({
-        space: space,
-        token: token,
-        contentType: this.contentType
-      })
-    } else {
-      this.contentful = new ContentfulSyncRedis({
-        space,
-        token,
-        contentfulHost,
-        redisHost,
-      })
-    }
+    this.contentful = new ContentfulSyncWrapper({
+      space: space,
+      token: token,
+      contentType: this.contentType
+    })
     this.elasticsearch = new ElasticsearchClient({
       host: args.elasticHost,
       user: args.elasticUser,

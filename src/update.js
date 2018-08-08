@@ -1,6 +1,6 @@
 const debug = require(`debug`)(`contentful-text-search:update`)
-const webhookTunnel = require(`contentful-webhook-tunnel`)
-const webhookListener = require(`contentful-webhook-listener`)
+// const webhookTunnel = require(`contentful-webhook-tunnel`)
+// const webhookListener = require(`contentful-webhook-listener`)
 
 module.exports = class Update {
   constructor(space, contentfulHost, indexer) {

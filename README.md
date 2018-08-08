@@ -58,7 +58,7 @@ Initialise the module using the `new` operator, passing in the mandatory values 
 
 - Elasticsearch host - Default: `http://localhost:9200`
 - Contentful API host - Default: `cdn.contentful.com`
-- Redis URL - Default: `redis://localhost:6379`
+- Redis URL - excluding this value results in content entries being pushed direct to Elasticsearch
 - Elasticsearch username - Default: `elastic`
 - Elasticsearch password - Default: none
 - Elasticsearch [log level](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/logging.html#logging-customization) - Default: `info`
