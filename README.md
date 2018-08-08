@@ -1,4 +1,9 @@
-[![Build Status](https://travis-ci.org/mattdean1/contentful-text-search.svg?branch=master)](https://travis-ci.org/mattdean1/contentful-text-search)
+[![Build Status](https://travis-ci.org/cxpartners/contentful-text-search.svg?branch=master)](https://travis-ci.org/cxpartners/contentful-text-search)
+
+#### Forked from [mattdean1/contentful-text-search](https://github.com/mattdean1/contentful-text-search)
+
+* allow optional use of redis (by excluding 'redisHost' from the configuration options)
+* allow sync of single of Contentful content type (as ES 6 enforces one 'type' per index) 
 
 # contentful-text-search
 
