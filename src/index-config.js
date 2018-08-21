@@ -27,6 +27,8 @@ const generateIndexMapping = (contentTypes, locale) => {
         mapping[ctName][`properties`][fieldName] = longTextField(locale)
       } else if (fieldType === `Symbol`) {
         mapping[ctName][`properties`][fieldName] = shortTextField()
+      } else if (fieldType === `Array`) {
+        mapping[ctName][`properties`][fieldName] = longTextField(locale)
       }
     })
   })

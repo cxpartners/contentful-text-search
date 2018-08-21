@@ -83,6 +83,7 @@ module.exports = class ContentfulSyncWrapper {
   async resolveReferences(entries) {
     try {
       const stringifiedContent = JSON.stringify(entries)
+
       // If we already resolved links for this content, return the stored data
       if (this.lastResolvedContent.content === stringifiedContent) {
         debug(`Resolved entries found in cache`)

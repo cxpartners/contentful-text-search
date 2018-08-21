@@ -69,7 +69,7 @@ const formatEntries = (entries, contentTypes, locales) => {
           } else if (fieldType === `Text`) {
             // convert long text fields from markdown to plaintext
             newEntry[locale][fieldName] = marked(fieldValue, { renderer })
-          } else if (fieldType === `Symbol`) {
+          } else if (fieldType === `Symbol` || fieldType === `Array`) {
             // dont need to reformat short text fields
             newEntry[locale][fieldName] = fieldValue
           }
@@ -114,6 +114,9 @@ const reduceEntries = entries =>
       const localisedFields = entry.fields[localeName]
       Object.keys(localisedFields).forEach(fieldName => {
         if (!Array.isArray(localisedFields[fieldName])) {
+          newEntry[localeName][fieldName] = localisedFields[fieldName]
+        } else if (!localisedFields[fieldName][0].sys) {
+          // allow array fields but skip processing any sys / link fields
           newEntry[localeName][fieldName] = localisedFields[fieldName]
         }
       })
