@@ -62,6 +62,7 @@ Initialise the module using the `new` operator, passing in the mandatory values 
 - Elasticsearch username - Default: `elastic`
 - Elasticsearch password - Default: none
 - Elasticsearch [log level](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/logging.html#logging-customization) - Default: `info`
+- AmazonES config object (see below) 
 
 ```javascript
 const ContentfulTextSearch = require('contentful-text-search')
@@ -73,7 +74,16 @@ const search = new ContentfulTextSearch({
   redisHost: 'optionalString',
   elasticUser: 'optionalString',
   elasticPassword: 'optionalString',
-  elasticLogLevel: 'optionalString'
+  elasticLogLevel: 'optionalString',
+  // optional AWS config
+  amazonES: {
+    // Do not pass credentials if using AWS IAM Roles
+    credentials: {
+      accessKeyId: 'optionalString',
+      secretAccessKey: 'optionalString'
+    },
+    region: 'eu-west-2'
+  }
 })
 ```
 

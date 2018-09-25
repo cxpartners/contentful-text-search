@@ -130,7 +130,7 @@ Strip contentful content types down to the barebones info and convert to an obje
 */
 const reduceContentTypes = (contentTypes, filterContentType) => {
   const barebonesContentType = contentTypes
-    .filter(type => filterContentType === '' || type.sys.id === filterContentType)
+    .filter(type => filterContentType === undefined || type.sys.id === filterContentType)
     .map(type => {
     const fields = type.fields
       .map(getBarebonesField)
