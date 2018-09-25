@@ -13,7 +13,7 @@ module.exports = class ContentfulTextSearch {
   constructor(args) {
     const { space, token, contentfulHost, redisHost} = args
     this.space = space
-    this.contentType = contentType ? contentType : ''
+    this.contentType = args.contentType
     this.contentful = new ContentfulSyncWrapper({
       space: space,
       token: token,
