@@ -31,7 +31,6 @@ module.exports = class ElasticsearchClient {
         });
       }
     }
-    console.log('Updated conf', conf)
     this.client = new elasticsearch.Client(conf)
   }
 
