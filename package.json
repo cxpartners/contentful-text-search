@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.321.0",
-    "contentful": "^7.0.3",
+    "contentful": "^4.6.1",
     "debug": "^3.1.0",
     "elasticsearch": "^15.1.1",
     "http-aws-es": "^6.0.0",
