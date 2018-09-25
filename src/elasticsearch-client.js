@@ -1,7 +1,9 @@
-const elasticsearch = require(`elasticsearch`)
+const AWS = require('aws-sdk');
+const connectionClass = require('http-aws-es');
+const elasticsearch = require('elasticsearch');
 
 module.exports = class ElasticsearchClient {
-  constructor({ host, user, password, logLevel }) {
+  constructor({ host, user, password, amazonES, logLevel }) {
     const conf = {
       host: host || `http://localhost:9200`,
       log: logLevel || `info`,
@@ -11,6 +13,25 @@ module.exports = class ElasticsearchClient {
       const username = user || `elastic`
       conf.httpAuth = `${username}:${password}`
     }
+
+    if (amazonES) {
+      conf.connectionClass = connectionClass
+      if (amazonES.credentials) {
+        AWS.config.update({
+          credentials: new AWS.Credentials(
+            amazonES.credentials.accessKeyId,
+            amazonES.credentials.secretAccessKey
+          )
+        });
+      }
+
+      if (amazonES.region) {
+        AWS.config.update({
+          region: amazonES.region
+        });
+      }
+    }
+    console.log('Updated conf', conf)
     this.client = new elasticsearch.Client(conf)
   }
 

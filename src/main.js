@@ -11,18 +11,19 @@ const config = require(`./index-config`)
 
 module.exports = class ContentfulTextSearch {
   constructor(args) {
-    const { space, token, contentfulHost, redisHost, contentType} = args
+    const { space, token, contentfulHost, redisHost} = args
     this.space = space
     this.contentType = contentType ? contentType : ''
     this.contentful = new ContentfulSyncWrapper({
       space: space,
       token: token,
-      contentType: this.contentType
+      contentType: args.contentType
     })
     this.elasticsearch = new ElasticsearchClient({
       host: args.elasticHost,
       user: args.elasticUser,
       password: args.elasticPassword,
+      amazonES: args.amazonES,
       logLevel: args.elasticLogLevel,
     })
     this.indexer = new Indexer(space, this.contentful, this.elasticsearch)
